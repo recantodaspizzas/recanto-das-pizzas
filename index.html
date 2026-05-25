@@ -1,38 +1,46 @@
 <!doctype html>
 <html lang="pt-br" class="h-full">
- <head>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Recanto das Pizzas | Pedido Online</title>
+  
+  <!-- Scripts e Fontes Externas -->
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&amp;family=Lato:wght@400;700;900&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Estilos Customizados -->
   <style>
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html, body { height: 100%; margin: 0; }
-        body { font-family: 'Lato', sans-serif; }
-        nav::-webkit-scrollbar { display: none; }
-        .cart-bar { transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .playfair { font-family: 'Playfair Display', serif; }
-        .italian-hero {
-            background: linear-gradient(135deg, #065f46 0%, #047857 50%, #dc2626 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        .italian-hero::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 40px 40px;
-            animation: float 20s infinite ease-in-out;
-        }
-        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
-        .product-image { aspect-ratio: 1; object-fit: cover; }
-    </style>
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100%; margin: 0; }
+    body { font-family: 'Lato', sans-serif; }
+    nav::-webkit-scrollbar { display: none; }
+    .cart-bar { transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .playfair { font-family: 'Playfair Display', serif; }
+    .italian-hero {
+        background: linear-gradient(135deg, #065f46 0%, #047857 50%, #dc2626 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    .italian-hero::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+        background-size: 40px 40px;
+        animation: float 20s infinite ease-in-out;
+    }
+    @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
+    .product-image { aspect-ratio: 1; object-fit: cover; }
+    @keyframes slide-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    .animate-slide-up { animation: slide-up 0.3s ease-out; }
+  </style>
+  
+  <!-- Configuração do Tailwind -->
   <script>
     tailwind.config = {
         theme: {
@@ -46,225 +54,291 @@
             }
         }
     }
-    </script>
-  <style>body { box-sizing: border-box; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
- </head>
- <body class="bg-italian-white text-gray-900 overflow-auto h-full"><!-- Hero Banner -->
+  </script>
+</head>
+<body class="bg-italian-white text-gray-900 overflow-auto h-full">
+
+  <!-- Hero Banner -->
   <div class="italian-hero w-full h-64 md:h-80 flex items-center justify-center relative">
    <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(6,95,70,0.95), rgba(220,38,38,0.95));"></div>
-   <div class="relative z-10 text-center w-full px-4"><img src="images/logo.jpg.png" alt="Logo Recanto das Pizzas" class="h-32 md:h-40 mx-auto mb-3 drop-shadow-xl rounded-full object-cover border-4 border-white/80" loading="lazy">
+   <div class="relative z-10 text-center w-full px-4">
+    <img src="images/logo.jpg.png" alt="Logo Recanto das Pizzas" class="h-32 md:h-40 mx-auto mb-3 drop-shadow-xl rounded-full object-cover border-4 border-white/80" loading="lazy">
     <h1 id="store-title" class="playfair text-white text-4xl md:text-5xl font-black drop-shadow-lg">Recanto das Pizzas</h1>
-    <p id="store-tagline" class="text-red-100 text-base md:text-lg mt-2 font-bold tracking-wide">Aberto 18:30 As 22:00🕙 "fechado às segundas-feira"</p>
+    <p id="store-tagline" class="text-red-100 text-base md:text-lg mt-2 font-bold tracking-wide">Aberto 18:30 As 22:00🕙 "fechado às segundas-feiras"</p>
    </div>
-  </div><!-- Navigation -->
-  <nav class="sticky top-0 z-50 bg-white/98 backdrop-blur-lg flex overflow-x-auto px-3 py-3 gap-2 shadow-lg justify-center border-b border-red-100"><a href="#pizzas" class="nav-link px-5 py-2.5 bg-gradient-to-r from-green-50 to-green-100 rounded-full text-sm font-bold text-italian-green hover:from-italian-green hover:to-green-700 hover:text-white transition-all whitespace-nowrap no-underline">🍕 Pizzas</a> <a href="#hamburgueres" class="nav-link px-5 py-2.5 bg-gradient-to-r from-orange-50 to-orange-100 rounded-full text-sm font-bold text-orange-700 hover:from-orange-600 hover:to-orange-700 hover:text-white transition-all whitespace-nowrap no-underline">🍔 Hambúrgueres</a> <a href="#bebidas" class="nav-link px-5 py-2.5 bg-gradient-to-r from-red-50 to-red-100 rounded-full text-sm font-bold text-italian-red hover:from-italian-red hover:to-red-700 hover:text-white transition-all whitespace-nowrap no-underline">🥤 Bebidas</a>
-  </nav><!-- Content -->
+  </div>
+
+  <!-- Navegação Categorias -->
+  <nav class="sticky top-0 z-50 bg-white/98 backdrop-blur-lg flex overflow-x-auto px-3 py-3 gap-2 shadow-lg justify-center border-b border-red-100">
+    <a href="#pizzas" class="nav-link px-5 py-2.5 bg-gradient-to-r from-green-50 to-green-100 rounded-full text-sm font-bold text-italian-green hover:from-italian-green hover:to-green-700 hover:text-white transition-all whitespace-nowrap no-underline">🍕 Pizzas</a> 
+    <a href="#hamburgueres" class="nav-link px-5 py-2.5 bg-gradient-to-r from-orange-50 to-orange-100 rounded-full text-sm font-bold text-orange-700 hover:from-orange-600 hover:to-orange-700 hover:text-white transition-all whitespace-nowrap no-underline">🍔 Hambúrgueres</a> 
+    <a href="#bebidas" class="nav-link px-5 py-2.5 bg-gradient-to-r from-red-50 to-red-100 rounded-full text-sm font-bold text-italian-red hover:from-italian-red hover:to-red-700 hover:text-white transition-all whitespace-nowrap no-underline">🥤 Bebidas</a>
+  </nav>
+
+  <!-- Conteúdo Cardápio -->
   <div class="max-w-3xl mx-auto px-4 pb-32 pt-6">
    <h2 id="pizzas" class="playfair text-2xl font-black text-italian-green flex items-center gap-3 mt-8 mb-6">🍕 Pizzas <span class="flex-1 h-1 bg-gradient-to-r from-italian-red to-transparent rounded-full"></span></h2>
    <div id="menu-pizzas"></div>
+   
    <h2 id="hamburgueres" class="playfair text-2xl font-black text-orange-600 flex items-center gap-3 mt-10 mb-6">🍔 Hambúrgueres <span class="flex-1 h-1 bg-gradient-to-r from-orange-600 to-transparent rounded-full"></span></h2>
    <div id="menu-hamburgueres"></div>
+   
    <h2 id="bebidas" class="playfair text-2xl font-black text-italian-red flex items-center gap-3 mt-10 mb-6">🥤 Bebidas <span class="flex-1 h-1 bg-gradient-to-r from-italian-red to-transparent rounded-full"></span></h2>
    <div id="menu-bebidas"></div>
-  </div><!-- Cart Bar -->
+  </div>
+
+  <!-- Barra do Carrinho Flutuante -->
   <div id="cart-bar" class="cart-bar fixed left-1/2 -translate-x-1/2 bg-gradient-to-r from-italian-green to-italian-red text-white rounded-2xl px-6 py-4 flex items-center justify-between shadow-2xl w-[calc(100%-2rem)] max-w-md cursor-pointer hover:shadow-3xl transition-all" style="bottom: -100px;" onclick="openCart()">
    <div class="flex items-center gap-3">
     <div class="bg-white/30 backdrop-blur rounded-full w-12 h-12 flex items-center justify-center">
      <i data-lucide="shopping-bag" class="w-6 h-6"></i>
     </div>
     <div>
-     <div class="font-bold text-sm" id="cart-count">
-      0 itens
-     </div>
-     <div class="text-xs opacity-90">
-      Toque para ver
-     </div>
+     <div class="font-bold text-sm" id="cart-count">0 itens</div>
+     <div class="text-xs opacity-90">Toque para ver</div>
     </div>
    </div>
-   <div class="font-black text-lg" id="cart-total">
-    R$ 0,00
-   </div>
-  </div><!-- Image Modal -->
+   <div class="font-black text-lg" id="cart-total">R$ 0,00</div>
+  </div>
+
+  <!-- Modal de Imagem Expandida -->
   <div id="image-modal" class="fixed inset-0 z-[300] hidden flex items-center justify-center">
    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeImageModal()"></div>
-   <div class="relative z-10 max-w-lg w-11/12"><button onclick="closeImageModal()" class="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition"><i data-lucide="x" class="w-5 h-5 text-gray-800"></i></button> <img id="modal-image" src="" alt="Imagem expandida" class="w-full rounded-2xl shadow-2xl object-cover">
+   <div class="relative z-10 max-w-lg w-11/12">
+    <button onclick="closeImageModal()" class="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition">
+        <i data-lucide="x" class="w-5 h-5 text-gray-800"></i>
+    </button> 
+    <img id="modal-image" src="" alt="Imagem expandida" class="w-full rounded-2xl shadow-2xl object-cover">
    </div>
-  </div><!-- Cart Modal -->
+  </div>
+
+  <!-- Modal do Carrinho de Compras -->
   <div id="cart-modal" class="fixed inset-0 z-[200] hidden">
    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeCart()"></div>
    <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl max-h-[85%] overflow-y-auto p-6 animate-slide-up">
     <div class="flex justify-between items-center mb-6 pb-4 border-b-2 border-red-100">
-     <h3 class="playfair text-2xl font-black text-italian-green">Seu Pedido</h3><button onclick="closeCart()" class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center hover:bg-red-200 transition"><i data-lucide="x" class="w-5 h-5 text-italian-red"></i></button>
+     <h3 class="playfair text-2xl font-black text-italian-green">Seu Pedido</h3>
+     <button onclick="closeCart()" class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center hover:bg-red-200 transition">
+        <i data-lucide="x" class="w-5 h-5 text-italian-red"></i>
+     </button>
     </div>
     <div id="cart-items"></div>
     <div id="cart-empty" class="text-center py-12 text-gray-400">
-     <div class="text-5xl mb-3">
-      🛒
-     </div>
+     <div class="text-5xl mb-3">🛒</div>
      <p class="font-semibold text-lg">Seu carrinho está vazio</p>
     </div>
     <div id="cart-footer" class="hidden border-t-2 border-red-100 pt-6 mt-6">
      <div class="bg-gradient-to-r from-green-50 to-red-50 rounded-xl p-4 mb-6">
       <div class="flex justify-between items-center">
-       <span class="font-bold text-lg text-gray-700">Total do pedido</span> <span class="playfair font-black text-2xl text-italian-red" id="modal-total">R$ 0,00</span>
+       <span class="font-bold text-lg text-gray-700">Total do pedido</span> 
+       <span class="playfair font-black text-2xl text-italian-red" id="modal-total">R$ 0,00</span>
       </div>
-     </div><button onclick="sendWhatsApp()" class="w-full bg-gradient-to-r from-italian-green to-italian-red hover:shadow-lg text-white font-black py-4 rounded-xl text-lg transition-all flex items-center justify-center gap-3 transform hover:scale-105"><i data-lucide="send" class="w-6 h-6"></i> Enviar Pedido via WhatsApp</button>
+     </div>
+     <button onclick="sendWhatsApp()" class="w-full bg-gradient-to-r from-italian-green to-italian-red hover:shadow-lg text-white font-black py-4 rounded-xl text-lg transition-all flex items-center justify-center gap-3 transform hover:scale-105">
+        <i data-lucide="send" class="w-6 h-6"></i> Enviar Pedido via WhatsApp
+     </button>
     </div>
    </div>
   </div>
-  <style>
-        @keyframes slide-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        .animate-slide-up { animation: slide-up 0.3s ease-out; }
-  </style>
+
+  <!-- Modal de Loja Fechada -->
+  <div id="closed-modal" class="fixed inset-0 z-[400] hidden flex items-center justify-center">
+   <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeClosedModal()"></div>
+   <div class="relative z-10 bg-white rounded-3xl p-8 max-w-sm w-11/12 text-center shadow-2xl animate-slide-up">
+    <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+     <i data-lucide="clock" class="w-10 h-10 text-italian-red"></i>
+    </div>
+    <h3 class="playfair text-2xl font-black text-gray-900 mb-2">Estamos Fechados</h3>
+    <p class="text-gray-600 mb-6 text-lg">Nosso horário de funcionamento é das <br><strong class="text-italian-green text-xl">18:30 às 22:00</strong>.<br><span class="text-sm mt-2 block">(Fechados às segundas-feiras)</span></p>
+    <button onclick="closeClosedModal()" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 rounded-xl transition-colors">Entendi, vou apenas olhar o cardápio</button>
+   </div>
+  </div>
+
+  <!-- Lógica JavaScript -->
   <script>
-        const menuData = {
-            pizzas: [
-                { id: 'p1', name: 'Pizza Mussarela', desc: 'Molho de tomate, mussarela, fatias de tomate, azeitonas, Oregano', price: 40.00, image: 'images/pizza_mussarela.jpg.png.jpg' },
-                { id: 'p2', name: 'Pizza Calabresa', desc: 'Molho de tomate, Mussarela, calabresa fatiada e cebola, Oregano', price: 40.00, image: 'images/pizza_calabresa.jpg.png' },
-                { id: 'p3', name: 'Pizza Frango com Catupiry', desc: 'Molho de tomate, Frango desfiado, catupiry original, Oregano', price: 40.00, image: 'images/frango com catupiry.png' },
-                { id: 'p4', name: 'Pizza Portuguesa', desc: 'Molho de tomate, Presunto, mussarela, ovos, ervilha, cebola e azeitonas', price: 40.00, image: 'images/pizza de portuguesa.png' },
-                { id: 'p5', name: 'Pizza 2 queijo', desc: 'Molho de tomate, Mussarela, parmesão e gorgonzola', price: 40.00, image: 'images/pizza dois queijo.png' },
-                { id: 'p6', name: 'Pizza Napolitano', desc: 'Molho de tomate, Mussarela, Rodelas de tomate, Magericão, azeitonas', price: 40.00, image: 'images/pizza napolitano.png' },
-            ],
-            hamburgueres: [
-                { id: 'h1', name: 'X-Burger Simples', desc: '1 carne Blend bovino 150g, queijo cheddar, milho, maionese da casa', price: 10.00, image: 'images/x-burguer simplis.png' },
-                { id: 'h2', name: 'X-Bacon', desc: '1 carne Blend bovino 150g, queijo cheddar, fatias de bacon crocante, alface e tomate, maionese da casa', price: 17.00, image: 'images/x-bacon (2).png' },
-                { id: 'h3', name: 'X-Calabresa', desc: '1 Carne Blend 150g, queijo cheddar, calabresa fatiada, alface e tomate, maionese da casa', price: 15.00, image: 'images/x-calabresa.png' },
-                { id: 'h4', name: 'X-EGG', desc: ',1 Carne Blend 150g, queijo cheddar, ovo, alface e tomate, maionese da casa', price: 14.00, image: 'images/x-Egg.png' },
-                { id: 'h5', name: 'X-Tudo', desc: '2 Carne Blend 150g, queijo cheddar, calabresa, alface e tomate, maionese da casa', price: 25.00, image: 'images/x-tudo.png' },
-            ],
-            bebidas: [
-                { id: 'b1', name: 'Coca-Cola 2L', desc: 'Garrafa pet gelada', price: 15.00, image: 'images/coca-cola.webp' },
-                { id: 'b2', name: 'Guaraná Santa Joana 2L', desc: 'Garrafa pet gelada', price: 7.00, image: 'images/santa joana.webp' },
-                { id: 'b3', name: 'guaraná 250ml', desc: 'guaraná Pequena (escolha nas observações)', price: 2.00, image: 'images/santa joana cola 250ml.webp' },
+    const menuData = {
+        pizzas: [
+            { id: 'p1', name: 'Pizza Mussarela', desc: 'Molho de tomate, mussarela, fatias de tomate, azeitonas, Oregano', price: 40.00, image: 'images/pizza_mussarela.jpg.png.jpg' },
+            { id: 'p2', name: 'Pizza Calabresa', desc: 'Molho de tomate, Mussarela, calabresa fatiada e cebola, Oregano', price: 40.00, image: 'images/pizza_calabresa.jpg.png' },
+            { id: 'p3', name: 'Pizza Frango com Catupiry', desc: 'Molho de tomate, Frango desfiado, catupiry original, Oregano', price: 40.00, image: 'images/frango com catupiry.png' },
+            { id: 'p4', name: 'Pizza Portuguesa', desc: 'Molho de tomate, Presunto, mussarela, ovos, ervilha, cebola e azeitonas', price: 40.00, image: 'images/pizza de portuguesa.png' },
+            { id: 'p5', name: 'Pizza 2 queijo', desc: 'Molho de tomate, Mussarela, parmesão e gorgonzola', price: 40.00, image: 'images/pizza dois queijo.png' },
+            { id: 'p6', name: 'Pizza Napolitano', desc: 'Molho de tomate, Mussarela, Rodelas de tomate, Magericão, azeitonas', price: 40.00, image: 'images/pizza napolitano.png' },
+        ],
+        hamburgueres: [
+            { id: 'h1', name: 'X-Burger Simples', desc: '1 carne Blend bovino 150g, queijo cheddar, milho, maionese da casa', price: 10.00, image: 'images/x-burguer simplis.png' },
+            { id: 'h2', name: 'X-Bacon', desc: '1 carne Blend bovino 150g, queijo cheddar, fatias de bacon crocante, alface e tomate, maionese da casa', price: 17.00, image: 'images/x-bacon (2).png' },
+            { id: 'h3', name: 'X-Calabresa', desc: '1 Carne Blend 150g, queijo cheddar, calabresa fatiada, alface e tomate, maionese da casa', price: 15.00, image: 'images/x-calabresa.png' },
+            { id: 'h4', name: 'X-EGG', desc: '1 Carne Blend 150g, queijo cheddar, ovo, alface e tomate, maionese da casa', price: 14.00, image: 'images/x-Egg.png' },
+            { id: 'h5', name: 'X-Tudo', desc: '2 Carne Blend 150g, queijo cheddar, calabresa, alface e tomate, maionese da casa', price: 25.00, image: 'images/x-tudo.png' },
+        ],
+        bebidas: [
+            { id: 'b1', name: 'Coca-Cola 2L', desc: 'Garrafa pet gelada', price: 15.00, image: 'images/coca-cola.webp' },
+            { id: 'b2', name: 'Guaraná Santa Joana 2L', desc: 'Garrafa pet gelada', price: 7.00, image: 'images/santa joana.webp' },
+            { id: 'b3', name: 'Guaraná 250ml', desc: 'Guaraná Pequena (escolha nas observações)', price: 2.00, image: 'images/santa joana cola 250ml.webp' },
+        ]
+    };
 
-            ]
-        };
+    let cart = {};
+    let isStoreOpen = true; 
+    const config = {
+        whatsapp_number: '5581997367519',
+        store_name: 'Recanto das Pizzas'
+    };
 
-        let cart = {};
-        const config = {
-            whatsapp_number: '5581997367519',
-            store_name: 'Recanto das Pizzas'
-        };
-
-        function renderMenu() {
-            ['pizzas', 'hamburgueres', 'bebidas'].forEach(cat => {
-                const container = document.getElementById('menu-' + cat);
-                container.innerHTML = menuData[cat].map(item => `
-                    <div class="bg-white rounded-2xl p-5 mb-4 flex gap-4 shadow-md hover:shadow-xl transition-all border-2 border-gray-50 hover:border-italian-red overflow-hidden">
-                        <img src="${item.image}" alt="${item.name}" class="w-20 h-20 rounded-xl object-cover flex-shrink-0 shadow-sm cursor-pointer hover:opacity-80 transition-opacity" loading="lazy" onclick="openImageModal('${item.image}')" onerror="this.style.background='linear-gradient(135deg, #fbbf24, #f59e0b)';">
-                        <div class="flex-1 flex flex-col justify-between">
-                            <div>
-                                <div class="playfair font-bold text-lg text-gray-900">${item.name}</div>
-                                <div class="text-xs text-gray-600 mt-1 leading-relaxed">${item.desc}</div>
-                            </div>
-                            <div class="flex justify-between items-center mt-3">
-                                <span class="text-italian-red font-black text-lg">R$ ${item.price.toFixed(2).replace('.', ',')}</span>
-                                <div class="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
-                                    <button onclick="changeQty('${item.id}', -1)" class="w-7 h-7 rounded-lg bg-white shadow-sm font-bold text-italian-red hover:bg-red-50">−</button>
-                                    <span class="font-bold min-w-[20px] text-center text-sm" id="qty-${item.id}">${cart[item.id] || 0}</span>
-                                    <button onclick="changeQty('${item.id}', 1)" class="w-7 h-7 rounded-lg bg-white shadow-sm font-bold text-italian-red hover:bg-red-50">+</button>
-                                </div>
+    function renderMenu() {
+        ['pizzas', 'hamburgueres', 'bebidas'].forEach(cat => {
+            const container = document.getElementById('menu-' + cat);
+            container.innerHTML = menuData[cat].map(item => `
+                <div class="bg-white rounded-2xl p-5 mb-4 flex gap-4 shadow-md hover:shadow-xl transition-all border-2 border-gray-50 hover:border-italian-red overflow-hidden">
+                    <img src="${item.image}" alt="${item.name}" class="w-20 h-20 rounded-xl object-cover flex-shrink-0 shadow-sm cursor-pointer hover:opacity-80 transition-opacity" loading="lazy" onclick="openImageModal('${item.image}')" onerror="this.style.background='linear-gradient(135deg, #fbbf24, #f59e0b)';">
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="playfair font-bold text-lg text-gray-900">${item.name}</div>
+                            <div class="text-xs text-gray-600 mt-1 leading-relaxed">${item.desc}</div>
+                        </div>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-italian-red font-black text-lg">R$ ${item.price.toFixed(2).replace('.', ',')}</span>
+                            <div class="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
+                                <button onclick="changeQty('${item.id}', -1)" class="w-7 h-7 rounded-lg bg-white shadow-sm font-bold text-italian-red hover:bg-red-50">−</button>
+                                <span class="font-bold min-w-[20px] text-center text-sm" id="qty-${item.id}">${cart[item.id] || 0}</span>
+                                <button onclick="changeQty('${item.id}', 1)" class="w-7 h-7 rounded-lg bg-white shadow-sm font-bold text-italian-red hover:bg-red-50">+</button>
                             </div>
                         </div>
                     </div>
-                `).join('');
-            });
+                </div>
+            `).join('');
+        });
+    }
+
+    function getAllItems() {
+        return [...menuData.pizzas, ...menuData.hamburgueres, ...menuData.bebidas];
+    }
+
+    function changeQty(id, delta) {
+        // Bloqueia adição de itens se a loja estiver fechada
+        if (!isStoreOpen && delta > 0) {
+            document.getElementById('closed-modal').classList.remove('hidden');
+            return; 
         }
 
-        function getAllItems() {
-            return [...menuData.pizzas, ...menuData.hamburgueres, ...menuData.bebidas];
-        }
+        cart[id] = Math.max(0, (cart[id] || 0) + delta);
+        const qtyEl = document.getElementById('qty-' + id);
+        if(qtyEl) qtyEl.textContent = cart[id];
+        if (cart[id] === 0) delete cart[id];
+        updateCartBar();
+    }
 
-        function changeQty(id, delta) {
-            cart[id] = Math.max(0, (cart[id] || 0) + delta);
-            const qtyEl = document.getElementById('qty-' + id);
-            if(qtyEl) qtyEl.textContent = cart[id];
-            if (cart[id] === 0) delete cart[id];
-            updateCartBar();
-        }
+    function updateCartBar() {
+        const items = getAllItems();
+        let total = 0, count = 0;
+        Object.entries(cart).forEach(([id, qty]) => {
+            const item = items.find(i => i.id === id);
+            if (item) { total += item.price * qty; count += qty; }
+        });
+        document.getElementById('cart-count').textContent = count + (count === 1 ? ' item' : ' itens');
+        document.getElementById('cart-total').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+        document.getElementById('cart-bar').style.bottom = count > 0 ? '20px' : '-100px';
+    }
 
-        function updateCartBar() {
-            const items = getAllItems();
-            let total = 0, count = 0;
-            Object.entries(cart).forEach(([id, qty]) => {
-                const item = items.find(i => i.id === id);
-                if (item) { total += item.price * qty; count += qty; }
-            });
-            document.getElementById('cart-count').textContent = count + (count === 1 ? ' item' : ' itens');
-            document.getElementById('cart-total').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
-            document.getElementById('cart-bar').style.bottom = count > 0 ? '20px' : '-100px';
-        }
+    function openCart() {
+        const modal = document.getElementById('cart-modal');
+        modal.classList.remove('hidden');
+        const items = getAllItems();
+        const cartEntries = Object.entries(cart);
+        const cartItemsEl = document.getElementById('cart-items');
+        const emptyEl = document.getElementById('cart-empty');
+        const footerEl = document.getElementById('cart-footer');
 
-        function openCart() {
-            const modal = document.getElementById('cart-modal');
-            modal.classList.remove('hidden');
-            const items = getAllItems();
-            const cartEntries = Object.entries(cart);
-            const cartItemsEl = document.getElementById('cart-items');
-            const emptyEl = document.getElementById('cart-empty');
-            const footerEl = document.getElementById('cart-footer');
-
-            if (cartEntries.length === 0) {
-                cartItemsEl.innerHTML = '';
-                emptyEl.classList.remove('hidden');
-                footerEl.classList.add('hidden');
-            } else {
-                emptyEl.classList.add('hidden');
-                footerEl.classList.remove('hidden');
-                let total = 0;
-                cartItemsEl.innerHTML = cartEntries.map(([id, qty]) => {
-                    const item = items.find(i => i.id === id);
-                    const subtotal = item.price * qty;
-                    total += subtotal;
-                    return `<div class="flex justify-between items-center py-3 border-b border-gray-100">
-                        <div>
-                            <div class="font-bold text-sm">${item.name}</div>
-                            <div class="text-xs text-gray-500">${qty}x R$ ${item.price.toFixed(2).replace('.', ',')}</div>
-                        </div>
-                        <span class="font-bold text-italian-red">R$ ${subtotal.toFixed(2).replace('.', ',')}</span>
-                    </div>`;
-                }).join('');
-                document.getElementById('modal-total').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
-            }
-            lucide.createIcons();
-        }
-
-        function closeCart() {
-            document.getElementById('cart-modal').classList.add('hidden');
-        }
-
-        function openImageModal(imageSrc) {
-            document.getElementById('modal-image').src = imageSrc;
-            document.getElementById('image-modal').classList.remove('hidden');
-        }
-
-        function closeImageModal() {
-            document.getElementById('image-modal').classList.add('hidden');
-        }
-
-        function sendWhatsApp() {
-            const items = getAllItems();
-            let msg = '🍕 *NOVO PEDIDO - ' + config.store_name + '*\n\n';
-            msg += '━━━━━━━━━━━━━━━\n';
+        if (cartEntries.length === 0) {
+            cartItemsEl.innerHTML = '';
+            emptyEl.classList.remove('hidden');
+            footerEl.classList.add('hidden');
+        } else {
+            emptyEl.classList.add('hidden');
+            footerEl.classList.remove('hidden');
             let total = 0;
-            Object.entries(cart).forEach(([id, qty]) => {
+            cartItemsEl.innerHTML = cartEntries.map(([id, qty]) => {
                 const item = items.find(i => i.id === id);
-                if (item) {
-                    msg += `*${qty}x* ${item.name}\n   R$ ${(item.price * qty).toFixed(2).replace('.', ',')}\n`;
-                    total += item.price * qty;
-                }
-            });
-            msg += '━━━━━━━━━━━━━━━\n';
-            msg += `*TOTAL: R$ ${total.toFixed(2).replace('.', ',')}*`;
-            
-            window.open(`https://wa.me/${config.whatsapp_number}?text=${encodeURIComponent(msg)}`, '_blank');
+                const subtotal = item.price * qty;
+                total += subtotal;
+                return `<div class="flex justify-between items-center py-3 border-b border-gray-100">
+                    <div>
+                        <div class="font-bold text-sm">${item.name}</div>
+                        <div class="text-xs text-gray-500">${qty}x R$ ${item.price.toFixed(2).replace('.', ',')}</div>
+                    </div>
+                    <span class="font-bold text-italian-red">R$ ${subtotal.toFixed(2).replace('.', ',')}</span>
+                </div>`;
+            }).join('');
+            document.getElementById('modal-total').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+        }
+        lucide.createIcons();
+    }
+
+    function closeCart() {
+        document.getElementById('cart-modal').classList.add('hidden');
+    }
+
+    function openImageModal(imageSrc) {
+        document.getElementById('modal-image').src = imageSrc;
+        document.getElementById('image-modal').classList.remove('hidden');
+    }
+
+    function closeImageModal() {
+        document.getElementById('image-modal').classList.add('hidden');
+    }
+
+    function sendWhatsApp() {
+        const items = getAllItems();
+        let msg = '🍕 *NOVO PEDIDO - ' + config.store_name + '*\n\n';
+        msg += '━━━━━━━━━━━━━━━\n';
+        let total = 0;
+        Object.entries(cart).forEach(([id, qty]) => {
+            const item = items.find(i => i.id === id);
+            if (item) {
+                msg += `*${qty}x* ${item.name}\n   R$ ${(item.price * qty).toFixed(2).replace('.', ',')}\n`;
+                total += item.price * qty;
+            }
+        });
+        msg += '━━━━━━━━━━━━━━━\n';
+        msg += `*TOTAL: R$ ${total.toFixed(2).replace('.', ',')}*`;
+        
+        window.open(`https://wa.me/${config.whatsapp_number}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function checkOperatingHours() {
+        const now = new Date();
+        const day = now.getDay();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        
+        const currentTimeInMinutes = (hours * 60) + minutes;
+        const openTime = (18 * 60) + 30; // 18:30 em minutos
+        const closeTime = 22 * 60;       // 22:00 em minutos
+
+        let isOpen = true;
+
+        if (day === 1) { // 1 = Segunda-feira
+            isOpen = false;
+        } else if (currentTimeInMinutes < openTime || currentTimeInMinutes >= closeTime) {
+            isOpen = false;
         }
 
-        renderMenu();
-        lucide.createIcons();
+        isStoreOpen = isOpen; 
+
+        if (!isStoreOpen) {
+            document.getElementById('closed-modal').classList.remove('hidden');
+        }
+    }
+
+    function closeClosedModal() {
+        document.getElementById('closed-modal').classList.add('hidden');
+    }
+
+    // Inicialização da Página
+    renderMenu();
+    lucide.createIcons();
+    checkOperatingHours();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f746b0a717d277a',t:'MTc3ODAzMzEwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
